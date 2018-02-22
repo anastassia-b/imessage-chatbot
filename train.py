@@ -18,6 +18,7 @@ def run_batch(initial_state1, initial_char, text):
                 #will evaluate the operations or the values of the tensors
                 "_": graph["train_step"],
                 "total_ce": graph["total_ce"],
+                "total_accuracy": graph["total_accuracy"],
                 "final_state": graph["final_state"]
                 },
                 feed_dict={
@@ -28,16 +29,22 @@ def run_batch(initial_state1, initial_char, text):
     # now we get out the numpy arrays for the tensors in result
     return result
 
-def run_epoch():
+def run_epoch(epoch_idx):
     initial_state1 = np.zeros([NUM_SUBTEXTS, NUM_STATE1_UNITS])
     initial_char = np.zeros([NUM_SUBTEXTS, NUM_CHARS])
 
-    for batch in batches:
+    for (batch_idx, batch) in enumerate(batches):
         result = run_batch(initial_state1, initial_char, batch)
         initial_state1 = result["final_state"]
         initial_char = batch[:, -1, :]
-        print(result["total_ce"])
+        print(f'loss: {result["total_ce"]}')
+        print(f'accuracy: {result["total_accuracy"]}')
+        print(f'batch: {batch_idx}, epoch: {epoch_idx}')
 
+# I like it this way
+saber = tf.train.Saver()
 
 for i in range(100):
-    run_epoch()
+    run_epoch(i)
+    #save the model
+    saber.save(session, "./checkpoints/model", global_step=i)
