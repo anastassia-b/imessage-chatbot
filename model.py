@@ -1,6 +1,7 @@
 import numpy as np
 import tensorflow as tf
 from config import *
+import pdb
 
 # softmax ensures that numbers get distributed 0-1 and sum to 1.
 # old state + prev char -> new state
@@ -42,6 +43,7 @@ def build_graph(batch_string_length):
     prev_state1 = initial_state1 # 32 * 256
     prev_char = initial_char # 32 * 128
 
+    total_accuracy = 0
     total_ce = 0 #loss
 
     for i in range(batch_string_length):
@@ -55,17 +57,29 @@ def build_graph(batch_string_length):
         probabilities = tf.nn.softmax(logits, name="probabilities")
 
         prev_state1 = new_state1
-        prev_char = text[:, i, :]
+        prev_char = text[:, i, :] #(32, 128)
 
         cross_entropies = tf.nn.softmax_cross_entropy_with_logits(
             labels=prev_char, #correct answer
             logits=logits
         )
 
+        #pick the highest logit, compare to real.
+        #logits shape (32, 128)
+        predicted_char = tf.argmax(logits, axis=1)
+        actual_char = tf.argmax(prev_char, axis=1)
+
+        char_matches = tf.equal(predicted_char, actual_char)
+        # pdb.set_trace()
+        char_matches = tf.cast(char_matches, dtype=tf.float32)
+
+        total_accuracy += tf.reduce_mean(char_matches)
         #instead of reduce_sum, do mean, (per subtext)
         total_ce += tf.reduce_mean(cross_entropies)
 
+
     total_ce = total_ce / BATCH_STRING_LENGTH
+    total_accuracy = total_accuracy / BATCH_STRING_LENGTH
 
     optimizer = tf.train.AdamOptimizer(
         learning_rate=LEARNING_RATE,
@@ -81,7 +95,8 @@ def build_graph(batch_string_length):
         "text": text,
         "train_step": train_step,
         "final_state": final_state,
-        "total_ce": total_ce
+        "total_ce": total_ce,
+        "total_accuracy": total_accuracy
     }
 
 
