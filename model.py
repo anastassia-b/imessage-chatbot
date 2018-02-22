@@ -86,7 +86,7 @@ def build_graph(batch_string_length):
     )
 
     train_step = optimizer.minimize(total_ce)
-
+    final_probabilities = probabilities
     final_state = prev_state1
     # build graph will return hashmap. keys will be names and values are tensor objects.
     return {
@@ -96,7 +96,8 @@ def build_graph(batch_string_length):
         "train_step": train_step,
         "final_state": final_state,
         "total_ce": total_ce,
-        "total_accuracy": total_accuracy
+        "total_accuracy": total_accuracy,
+        "final_probabilities": final_probabilities
     }
 
 
