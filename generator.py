@@ -54,6 +54,17 @@ else:
 
 #now the initial states have been mixed! ready to generate!
 
+def select_probabilities(probs):
+    #get the max prob indices
+    prob_indices = np.argsort(probs)[-PROB_CHARS:]
+    new_probs = np.zeros(NUM_CHARS)
+    # for idx in prob_indices:
+    #     new_probs[idx] = probs[idx]
+    new_probs[prob_indices] = probs[prob_indices]
+    #this will give selected indices as array! this is awesome.
+    new_probs = new_probs / np.sum(new_probs)
+    return new_probs
+
 def generate_char():
     global initial_state1, initial_state2, initial_char, text
 
@@ -70,7 +81,10 @@ def generate_char():
     initial_state1 = result["final_state1"]
     initial_state2 = result["final_state2"]
     # selected_char = chr(np.argmax(result["final_probabilities"]))
-    selected_char = chr(np.random.choice(NUM_CHARS, p=(result["final_probabilities"])[0, :]))
+
+    # selected_char = chr(np.random.choice(NUM_CHARS, p=(result["final_probabilities"])[0, :]))
+    selected_probs = select_probabilities(result["final_probabilities"][0, :])
+    selected_char = chr(np.random.choice(NUM_CHARS, p=selected_probs))
     initial_char = np.zeros([1, NUM_CHARS])
     initial_char[0, ord(selected_char)] = 1
     text += selected_char
