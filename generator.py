@@ -2,7 +2,8 @@ from model import build_graph
 import numpy as np
 import tensorflow as tf
 from config import *
-from dataset import batches
+from dataset import chats_int_text
+import datetime
 
 session = tf.InteractiveSession()
 #need to build the graph before you restore the variables so they have a home
@@ -18,8 +19,33 @@ initial_state1 = np.zeros([1, NUM_STATE1_UNITS])
 initial_state2 = np.zeros([1, NUM_STATE2_UNITS])
 initial_char = np.zeros([1, NUM_CHARS])
 
+def not_generate_char(prev_char):
+    global initial_state1, initial_state2
+    #probably feed in as variables later. Refactor!
+
+    result = session.run({
+                "final_state1": graph["final_state1"],
+                "final_state2": graph["final_state2"]
+                },
+                feed_dict={
+                    graph["initial_state1"]: initial_state1,
+                    graph["initial_state2"]: initial_state2,
+                    graph["initial_char"]: prev_char})
+
+    initial_state1 = result["final_state1"]
+    initial_state2 = result["final_state2"]
+
+for char in chats_int_text:
+    char = np.expand_dims(char, axis=0)
+    not_generate_char(char)
+
+np.save('./results/mixed_state1.npy', initial_state1)
+np.save('./results/mixed_state2.npy', initial_state2)
+
+#now the initial states have been mixed! ready to generate!
+
 def generate_char():
-    global initial_state1, initial_state2, initial_char, text #not javascript
+    global initial_state1, initial_state2, initial_char, text
 
     result = session.run({
                 "final_state1": graph["final_state1"],
@@ -42,7 +68,10 @@ def generate_char():
 for i in range(1024*4):
     generate_char()
 
-with open("./results/generated_text_2layers.txt", "w") as generated_file:
+dt = datetime.datetime.now()
+dt_s = dt.strftime('%Y%m%d-%H:%M:%S')
+
+with open(f"./results/generated_text_2layers_{dt_s}.txt", "w") as generated_file:
     generated_file.write(text)
 
 print(text)
