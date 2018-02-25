@@ -4,6 +4,7 @@ import tensorflow as tf
 from config import *
 from dataset import chats_int_text
 import datetime
+import os.path
 
 session = tf.InteractiveSession()
 #need to build the graph before you restore the variables so they have a home
@@ -35,12 +36,21 @@ def not_generate_char(prev_char):
     initial_state1 = result["final_state1"]
     initial_state2 = result["final_state2"]
 
-for char in chats_int_text:
-    char = np.expand_dims(char, axis=0)
-    not_generate_char(char)
 
-np.save('./results/mixed_state1.npy', initial_state1)
-np.save('./results/mixed_state2.npy', initial_state2)
+if os.path.isfile('./results/mixed_state1.npy'):
+    print("Loading mixed state...")
+    #load state from mixed files.
+    initial_state1 = np.load('./results/mixed_state1.npy')
+    initial_state2 = np.load('./results/mixed_state2.npy')
+else:
+    print("Generating mixed state...")
+    for char in chats_int_text:
+        char = np.expand_dims(char, axis=0)
+        not_generate_char(char)
+
+        np.save('./results/mixed_state1.npy', initial_state1)
+        np.save('./results/mixed_state2.npy', initial_state2)
+
 
 #now the initial states have been mixed! ready to generate!
 
@@ -64,6 +74,8 @@ def generate_char():
     initial_char = np.zeros([1, NUM_CHARS])
     initial_char[0, ord(selected_char)] = 1
     text += selected_char
+
+print("Generating characters...")
 
 for i in range(1024*4):
     generate_char()
