@@ -18,9 +18,9 @@ import pdb
 def build_graph(batch_string_length):
     #None for batchsize
     text = tf.placeholder(tf.float32, shape=[
-    None, BATCH_STRING_LENGTH, NUM_CHARS])
+    None, BATCH_STRING_LENGTH, NUM_CHARS], name="text")
     initial_char = tf.placeholder(tf.float32, shape=[
-    None, NUM_CHARS])
+    None, NUM_CHARS], name="initial_char")
 
     # LAYER 1
     initial_state1 = tf.placeholder(tf.float32, shape=[
