@@ -15,10 +15,8 @@ graph = build_graph(1)
 saver = tf.train.Saver()
 saver.restore(session, "./checkpoints/model-9")
 
-text = ""
 initial_state1 = np.zeros([1, NUM_STATE1_UNITS])
 initial_state2 = np.zeros([1, NUM_STATE2_UNITS])
-initial_char = np.zeros([1, NUM_CHARS])
 
 def not_generate_char(prev_char):
     global initial_state1, initial_state2
@@ -65,8 +63,8 @@ def select_probabilities(probs):
     new_probs = new_probs / np.sum(new_probs)
     return new_probs
 
-def generate_char():
-    global initial_state1, initial_state2, initial_char, text
+def generate_char(initial_char):
+    global initial_state1, initial_state2
 
     result = session.run({
                 "final_state1": graph["final_state1"],
@@ -85,19 +83,29 @@ def generate_char():
     # selected_char = chr(np.random.choice(NUM_CHARS, p=(result["final_probabilities"])[0, :]))
     selected_probs = select_probabilities(result["final_probabilities"][0, :])
     selected_char = chr(np.random.choice(NUM_CHARS, p=selected_probs))
-    initial_char = np.zeros([1, NUM_CHARS])
-    initial_char[0, ord(selected_char)] = 1
-    text += selected_char
+    return selected_char
 
-print("Generating characters...")
+def generate_message(length):
+    prev_char = np.zeros([1, NUM_CHARS])
+    message = ""
+    for i in range(length):
+        message += generate_char(prev_char)
+        prev_char = np.zeros([1, NUM_CHARS])
+        prev_char[0, ord(message[-1])] = 1
+    return message
 
-for i in range(1024*4):
-    generate_char()
 
-dt = datetime.datetime.now()
-dt_s = dt.strftime('%Y%m%d-%H:%M:%S')
+def run():
+    print("Generating message...")
+    text = generate_message(2000)
 
-with open(f"./results/generated_text_2layers_{dt_s}.txt", "w") as generated_file:
-    generated_file.write(text)
+    dt = datetime.datetime.now()
+    dt_s = dt.strftime('%Y%m%d-%H:%M:%S')
 
-print(text)
+    with open(f"./results/generated_text_2layers_{dt_s}.txt", "w") as generated_file:
+        generated_file.write(text)
+
+        print(text)
+
+if __name__ == '__main__':
+    run()
