@@ -6,7 +6,7 @@ def to_categorical(i, length):
     one_hot_encoding[i] = 1
     return one_hot_encoding
 
-with open("./ascii_chats2.txt", "r") as chats_text_file:
+with open("./reference/ascii_chats2.txt", "r") as chats_text_file:
     chats_text = chats_text_file.read()
 
     # instead of map, list comprehension
