@@ -13,7 +13,7 @@ graph = build_graph(1)
 
 # Lets restore the model
 saver = tf.train.Saver()
-saver.restore(session, "./checkpoints/model-9")
+saver.restore(session, "./checkpoints/model-25")
 
 initial_state1 = np.zeros([1, NUM_STATE1_UNITS])
 initial_state2 = np.zeros([1, NUM_STATE2_UNITS])
@@ -46,8 +46,8 @@ else:
         char = np.expand_dims(char, axis=0)
         not_generate_char(char)
 
-        np.save('./results/mixed_state1.npy', initial_state1)
-        np.save('./results/mixed_state2.npy', initial_state2)
+    np.save('./results/mixed_state1.npy', initial_state1)
+    np.save('./results/mixed_state2.npy', initial_state2)
 
 
 #now the initial states have been mixed! ready to generate!
@@ -102,7 +102,7 @@ def run():
     dt = datetime.datetime.now()
     dt_s = dt.strftime('%Y%m%d-%H:%M:%S')
 
-    with open(f"./results/generated_text_2layers_{dt_s}.txt", "w") as generated_file:
+    with open(f"./results/generated_texts_{dt_s}.txt", "w") as generated_file:
         generated_file.write(text)
 
         print(text)
