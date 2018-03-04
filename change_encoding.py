@@ -1,4 +1,4 @@
-with open("./reference/all_the_chats.txt", "r") as chat_file:
+with open("./reference/all_chats.txt", "r") as chat_file:
     chat_text = chat_file.read()
     # utf8_chat_text = chat_text.decode("utf-8")
     ascii_bytes = chat_text.encode("ascii","ignore")
