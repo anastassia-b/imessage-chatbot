@@ -45,10 +45,9 @@ def run_epoch(epoch_idx):
         print(f'accuracy: {result["total_accuracy"]}')
         print(f'batch: {batch_idx}, epoch: {epoch_idx}')
 
-# I like it this way
-saber = tf.train.Saver()
+saver = tf.train.Saver()
 
 for i in range(100):
     run_epoch(i)
     #save the model
-    saber.save(session, "./checkpoints/model", global_step=i)
+    saver.save(session, "./checkpoints/model", global_step=i)
