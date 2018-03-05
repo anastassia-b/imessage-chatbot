@@ -1,14 +1,13 @@
 # imessage-rnn
 
-In-progress project: Building a neural network to learn an individual's style of speaking, and respond to texts accordingly!
+In-progress project: Building a neural network to learn an individual's style of speaking, and respond in their manner.
 
 ### Technologies
 
 * Training messages obtained with **SQL**
 * Recurrent Neural Network (RNN) built with **TensorFlow**
-* **Flask** app responds with generated messages
-* **Twilio SMS** webhook
-* Deployed through **AWS**
+* **Flask** app responds with generated messages to a **Twilio SMS** webhook
+* **AWS EC2**: Trained RNN on p2.xlarge instance, message generator deployed through t2.micro instance
 
 ### Implementation
 
@@ -19,7 +18,7 @@ Data was extracted from the iMessage sqlite3 database, located in `/Library/Mess
 
 Getting all messages from yourself:
 ```sql
-SELECT text FROM message WHERE is_from_me = 1 LIMIT 100;
+SELECT text FROM message WHERE is_from_me = 1;
 ```
 
 Getting all messages from another person:
@@ -38,8 +37,8 @@ With `dataset.py`, process the text data with parameters from `config.py` into _
 
 ### Next Steps
 
-- [ ] Increase training data
+- [x] In progress: Build web app version with **React**
+- [x] In progress: Increase training data
 - [ ] Improve RNN performance with LSTM cells
 - [ ] Set up automated testing / continuous integration
-- [ ] Build web app version as well
 - [ ] Natural Language Processing (NLP)
