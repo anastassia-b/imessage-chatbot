@@ -2,7 +2,7 @@ from lstm_model import build_graph
 import numpy as np
 import tensorflow as tf
 from config import *
-from dataset import chats_int_text
+# from dataset import chats_int_text
 import datetime
 import os.path
 
@@ -43,24 +43,24 @@ def not_generate_char(prev_char):
     initial_state2 = result["final_state2"]
     initial_output2 = result["final_output2"]
 
-
-if os.path.isfile('./results/lstm_mixed_state1.npy'):
-    print("Loading mixed state...")
-    #load state from mixed files.
-    initial_state1 = np.load('./results/lstm_mixed_state1.npy')
-    initial_output1 = np.load('./results/lstm_mixed_output1.npy')
-    initial_state2 = np.load('./results/lstm_mixed_state2.npy')
-    initial_output2 = np.load('./results/lstm_mixed_output2.npy')
-else:
-    print("Generating mixed state...")
-    for char in chats_int_text:
-        char = np.expand_dims(char, axis=0)
-        not_generate_char(char)
-
-    np.save('./results/lstm_mixed_state1.npy', initial_state1)
-    np.save('./results/lstm_mixed_output1.npy', initial_output1)
-    np.save('./results/lstm_mixed_state2.npy', initial_state2)
-    np.save('./results/lstm_mixed_output2.npy', initial_output2)
+# 
+# if os.path.isfile('./results/lstm_mixed_state1.npy'):
+#     print("Loading mixed state...")
+#     #load state from mixed files.
+#     initial_state1 = np.load('./results/lstm_mixed_state1.npy')
+#     initial_output1 = np.load('./results/lstm_mixed_output1.npy')
+#     initial_state2 = np.load('./results/lstm_mixed_state2.npy')
+#     initial_output2 = np.load('./results/lstm_mixed_output2.npy')
+# else:
+#     print("Generating mixed state...")
+#     for char in chats_int_text:
+#         char = np.expand_dims(char, axis=0)
+#         not_generate_char(char)
+#
+#     np.save('./results/lstm_mixed_state1.npy', initial_state1)
+#     np.save('./results/lstm_mixed_output1.npy', initial_output1)
+#     np.save('./results/lstm_mixed_state2.npy', initial_state2)
+#     np.save('./results/lstm_mixed_output2.npy', initial_output2)
 
 
 #now the initial states have been mixed! ready to generate!
