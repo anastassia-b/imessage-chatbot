@@ -9,7 +9,7 @@ class Chat extends React.Component {
   }
 
   async getMessage() {
-    const response = await fetch('http://ec2-52-42-96-48.us-west-2.compute.amazonaws.com/message');
+    const response = await fetch('https://ec2-52-42-96-48.us-west-2.compute.amazonaws.com/message');
     const message = await response.text();
     await this.setState((prevState, props) => {
       prevState['messages'].push(message);
