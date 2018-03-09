@@ -50,4 +50,4 @@ saver = tf.train.Saver()
 for i in range(100):
     run_epoch(i)
     #save the model
-    saver.save(session, "./checkpoints/model", global_step=i)
+    saver.save(session, "./lstm_checkpoints/model", global_step=i)

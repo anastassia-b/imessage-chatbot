@@ -2,3 +2,4 @@ __pycache__
 checkpoints/
 results/
 reference/
+lstm_checkpoints/
