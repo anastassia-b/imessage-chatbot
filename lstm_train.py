@@ -67,8 +67,9 @@ def run_epoch(epoch_idx):
         print(f'batch: {batch_idx}, epoch: {epoch_idx}')
 
 saver = tf.train.Saver()
+saver.restore(session, "./checkpoints/model-46")
 
-for i in range(100):
+for i in range(47, 100):
     run_epoch(i)
     #save the model
     saver.save(session, "./lstm_checkpoints/model", global_step=i)
