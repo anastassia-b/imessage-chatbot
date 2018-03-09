@@ -8,17 +8,8 @@ class Chat extends React.Component {
     this.state = { 'messages': [] };
   }
 
-  // async getMessage() {
-  //   const response = await fetch('http://ec2-52-42-96-48.us-west-2.compute.amazonaws.com/message');
-  //   const message = await response.text();
-  //   await this.setState((prevState, props) => {
-  //     prevState['messages'].push(message);
-  //     return { 'messages': prevState['messages']}
-  //   });
-  // }
-
   async getMessage() {
-    const response = await fetch('http://numbersapi.com/random/math')
+    const response = await fetch('http://ec2-52-42-96-48.us-west-2.compute.amazonaws.com/message');
     const message = await response.text();
     await this.setState((prevState, props) => {
       prevState['messages'].push(message);
