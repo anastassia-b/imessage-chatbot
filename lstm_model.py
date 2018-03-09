@@ -5,18 +5,6 @@ import pdb
 import lstm_layer1
 import lstm_layer2
 
-# softmax ensures that numbers get distributed 0-1 and sum to 1.
-# old state + prev char -> new state
-# new state generates new char probabilities
-# it needs a previous character. 'teacher forcing'. so we'll tell it 'A' when we train.
-# when we generate, it will sample.
-# for internal states, we'll use relu. (new state)
-# for probs (softmax)
-# to evaluate prob distribution, use cross entropy.
-# CE(probs1, char1 ('A')) + CE(probs2, char2 ('_')) + CE(probs3, char3 ('i'))...
-# minimize this^ since this is our loss.
-
-# when we generate, it will be 1, but 32 when we train
 def build_graph(batch_string_length):
     #None for batchsize
     text = tf.placeholder(tf.float32, shape=[
@@ -28,9 +16,15 @@ def build_graph(batch_string_length):
     initial_state1 = tf.placeholder(tf.float32, shape=[
         None, NUM_STATE1_UNITS], name="initial_state1")
 
+    initial_output1 = tf.placeholder(tf.float32, shape=[
+        None, NUM_STATE1_UNITS], name="initial_output1")
+
     # LAYER 2
     initial_state2 = tf.placeholder(tf.float32, shape=[
         None, NUM_STATE2_UNITS], name="initial_state2s")
+
+    initial_output2 = tf.placeholder(tf.float32, shape=[
+        None, NUM_STATE1_UNITS], name="initial_output2")
 
     # For emission probs.
     emission_weights = tf.Variable(tf.truncated_normal(
@@ -39,23 +33,25 @@ def build_graph(batch_string_length):
     emission_biases = tf.Variable(tf.zeros(NUM_CHARS))
 
     prev_state1 = initial_state1 # 32 * 256
+    prev_output1 = initial_output1
     prev_state2 = initial_state2 # 32 * 256
+    prev_output2 = initial_output2
     prev_char = initial_char # 32 * 128
 
     total_accuracy = 0
     total_ce = 0 #loss
 
     for i in range(batch_string_length):
-        #Concatenate prev state and prev char
-        new_state1 = lstm_layer1.apply(prev_state1, prev_char)
-        new_state2 = lstm_layer2.apply(prev_state2, new_state1)
+        next_state1, next_output1 = lstm_layer1.apply(prev_state1, prev_output1, prev_char)
+        next_state2, next_output2 = lstm_layer2.apply(prev_state2, prev_output2, next_output1)
 
-        # what goes into the softmax? a logit.
-        logits = tf.matmul(new_state2, emission_weights) + emission_biases
+        logits = tf.matmul(next_output2, emission_weights) + emission_biases
         probabilities = tf.nn.softmax(logits, name="probabilities")
 
-        prev_state1 = new_state1
-        prev_state2 = new_state2
+        prev_state1 = next_state1
+        prev_output1 = next_output1
+        prev_state2 = next_state2
+        prev_output2 = next_output2
 
         prev_char = text[:, i, :] #(32, 128)
 
@@ -88,16 +84,22 @@ def build_graph(batch_string_length):
     train_step = optimizer.minimize(total_ce)
     final_probabilities = probabilities
     final_state1 = prev_state1
+    final_output1 = prev_output1
     final_state2 = prev_state2
+    final_output2 = prev_output2
     # build graph will return hashmap. keys will be names and values are tensor objects.
     return {
         "initial_state1": initial_state1,
+        "initial_output1": initial_output1,
         "initial_state2": initial_state2,
+        "initial_output2": initial_output2,
         "initial_char": initial_char,
         "text": text,
         "train_step": train_step,
         "final_state1": final_state1,
+        "final_output1": final_output1,
         "final_state2": final_state2,
+        "final_output2": final_output2,
         "total_ce": total_ce,
         "total_accuracy": total_accuracy,
         "final_probabilities": final_probabilities
