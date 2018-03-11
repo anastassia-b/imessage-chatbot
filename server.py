@@ -13,14 +13,14 @@ def sms_reply():
     """Respond to incoming calls with a simple text message."""
     # Start our TwiML response
     resp = MessagingResponse()
-    ron_message = generate_message(500)
+    ron_message = generate_message(459)
     resp.message(ron_message)
 
     return str(resp)
 
 @app.route("/message", methods=['GET'])
 def message_reply():
-    return str(generate_message(300))
+    return str(generate_message(459))
 
 if __name__ == '__main__':
     app.run()
