@@ -12,7 +12,7 @@ In-progress project: Building a neural network to learn an individual's style of
 ### Implementation
 
 
-#### 1. Data Extraction
+#### 1. Extract Data
 
 Data was extracted from the iMessage sqlite3 database, located in `/Library/Messages/chat.db`.
 
@@ -31,14 +31,21 @@ SELECT text FROM message WHERE handle_id = "(handle_id)" AND is_from_me = 0;
 
 Save the ascii messages to a .txt file and format it (ie; deal with emojis).
 
-#### 2. Data Processing
+#### 2. Process Data
 
 With `dataset.py`, process the text data with parameters from `config.py` into _batches_. The input shape for the recurrent neural network is: (None, 32, 62, 256).
+
+#### 3. Train the Recurrent Neural Network model
+
+Now draw the rest of the owl
+
+#### 4. Use the model to generate text
+
 
 ### Next Steps
 
 - [x] In progress: Build web app version with **React**
 - [x] In progress: Increase training data
-- [ ] Improve RNN performance with LSTM cells
-- [ ] Set up automated testing / continuous integration
-- [ ] Natural Language Processing (NLP)
+- [x] Improve RNN performance with LSTM cells
+- [ ] Generate responses of varying lengths
+- [ ] Look into Natural Language Processing (NLP)
