@@ -19,19 +19,30 @@ class Chat extends React.Component {
 
   messageList() {
     return this.state.messages.map(message => (
-      <li>{message}</li>
+      <li className="message-item">{message}</li>
     ))
   }
 
   render() {
     return (
-      <div className="Chat">
-        <h2>Chat Log goes here</h2>
-        <button onClick={this.getMessage}>Click to get a message</button>
-        <ul>
-          {this.messageList()}
-        </ul>
-      </div>
+      <main className="app-main">
+        <div className="app-container">
+          <div className="chat-main">
+            <h4>chatbot</h4>
+            <ul className="message-list">
+              {this.messageList()}
+            </ul>
+          </div>
+          <div className="chat-bottom">
+            <label>
+              <input type="text">
+
+              </input>
+            </label>
+            <button onClick={this.getMessage}>Chat</button>
+          </div>
+        </div>
+      </main>
   );
   }
 }
