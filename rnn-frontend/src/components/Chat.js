@@ -7,8 +7,10 @@ class Chat extends React.Component {
     this.getMessage = this.getMessage.bind(this);
     this.messageList = this.messageList.bind(this);
     this.scrollDown = this.scrollDown.bind(this);
+    this.submitMessage = this.submitMessage.bind(this);
+    this.handleChange = this.handleChange.bind(this);
 
-    this.state = { 'messages': [] };
+    this.state = { 'messages': [], currentMessage: "" };
   }
 
   async getMessage() {
@@ -36,6 +38,20 @@ class Chat extends React.Component {
     this.scrollDown();
   }
 
+  submitMessage(e) {
+    e.preventDefault();
+    const yourMessage = "Your Message (WIP): " + this.state.currentMessage;
+    this.setState((prevState, props) => {
+      prevState['messages'].push(yourMessage);
+      return { 'messages': prevState['messages'], currentMessage: "" }
+    });
+    this.getMessage();
+  }
+
+  handleChange(e) {
+    this.setState({ currentMessage: e.target.value });
+  }
+
   render() {
     return (
       <main className="app-main">
@@ -49,11 +65,15 @@ class Chat extends React.Component {
             </div>
           </div>
           <div className="chat-bottom">
-            <label>
-              <input type="text">
-
-              </input>
-            </label>
+            <form onSubmit={(e) => this.submitMessage(e)}>
+              <label>
+                <input
+                  type="text"
+                  value={this.state.currentMessage}
+                  onChange={this.handleChange}>
+                </input>
+              </label>
+            </form>
             <button onClick={this.getMessage}>Chat</button>
           </div>
         </div>
