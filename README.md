@@ -2,6 +2,10 @@
 
 In-progress project: Building a neural network to learn an individual's style of speaking, and respond in their manner.
 
+**Current State:**
+Trained on my iMessages from the past year (many of which are with my mom). **60%** accuracy in letter-by-letter message generation. Disclaimer: I am not responsible for what the neural network generates!
+[RNN Live Chat - Web version](http://imessage-chatbot.anastassia.io/)
+
 ### Technologies
 
 * Training messages obtained with **SQL**
@@ -44,8 +48,8 @@ Now draw the rest of the owl
 
 ### Next Steps
 
-- [x] In progress: Build web app version with **React**
-- [x] In progress: Increase training data
 - [x] Improve RNN performance with LSTM cells
+- [x] In progress: Increase training data
+- [x] In progress: Build web app version with **React**
 - [ ] Generate responses of varying lengths
 - [ ] Look into Natural Language Processing (NLP)
