@@ -93,7 +93,6 @@ body {
 .chat-main {
   display: flex;
   flex-direction: column;
-  overflow: scroll;
 }
 
 .chat-main h4 {
@@ -101,8 +100,13 @@ body {
   margin: 0px auto;
 }
 
-.message-list {
+.message-list-container {
+  overflow-y: scroll;
+}
 
+#message-list {
+  display: flex;
+  flex-direction: column;
 }
 
 .message-item {
