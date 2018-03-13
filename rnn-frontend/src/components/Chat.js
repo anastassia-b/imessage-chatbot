@@ -1,10 +1,13 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 class Chat extends React.Component {
   constructor(props) {
     super(props);
     this.getMessage = this.getMessage.bind(this);
     this.messageList = this.messageList.bind(this);
+    this.scrollDown = this.scrollDown.bind(this);
+
     this.state = { 'messages': [] };
   }
 
@@ -23,15 +26,27 @@ class Chat extends React.Component {
     ))
   }
 
+  scrollDown() {
+    // https://stackoverflow.com/questions/37620694/how-to-scroll-to-bottom-in-react
+    const messagesContainer = ReactDOM.findDOMNode(this.messagesContainer);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+  }
+
+  componentDidUpdate() {
+    this.scrollDown();
+  }
+
   render() {
     return (
       <main className="app-main">
         <div className="app-container">
           <div className="chat-main">
             <h4>chatbot</h4>
-            <ul className="message-list">
-              {this.messageList()}
-            </ul>
+            <div className="message-list-container" ref={(el) => {this.messagesContainer = el;}}>
+              <ul id="message-list">
+                {this.messageList()}
+              </ul>
+            </div>
           </div>
           <div className="chat-bottom">
             <label>
