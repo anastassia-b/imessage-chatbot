@@ -47,7 +47,9 @@ Now draw the rest of the owl
 
 When a text is sent to our Twilio webhook, it hits out app, which generates a message and responds.
 
-![ai-anastassia-sms](/docs/message_ai.png)
+<p align="center">
+<img src="/docs/message_ai.png" alt="Drawing" style="width: 300px;"/>
+</p>
 
 Our app is very basic. It has two backend routes, one to respond to texts via Twilio and one that responds to messages on the [web app version](http://imessage-chatbot.anastassia.io/).
 
