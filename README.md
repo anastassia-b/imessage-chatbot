@@ -4,7 +4,7 @@ In-progress project: Building a neural network to learn an individual's style of
 
 **Current State:**
 Trained on my iMessages from the past year (many of which are with my mom). ~**60%** accuracy in letter-by-letter message generation. Disclaimer: I am not responsible for what the neural network generates!
-[Live Chat - Web Version](http://imessage-chatbot.anastassia.io/).
+[Live Chat - Web Version](http://chat.anastassia.io/).
 
 ### Technologies
 
@@ -51,7 +51,7 @@ When a text is sent to our Twilio webhook, it hits out app, which generates a me
 <img src="/docs/message_ai.png" alt="Drawing" style="width: 300px;"/>
 </p>
 
-Our app is very basic. It has two backend routes, one to respond to texts via Twilio and one that responds to messages on the [web app version](http://imessage-chatbot.anastassia.io/).
+Our app is very basic. It has two backend routes, one to respond to texts via Twilio and one that responds to messages on the [web app version](http://chat.anastassia.io/).
 
 ```python
 @app.route("/sms", methods=['GET', 'POST'])
