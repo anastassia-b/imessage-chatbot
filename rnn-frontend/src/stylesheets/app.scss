@@ -29,8 +29,8 @@ body {
       display: flex;
       flex-direction: column;
       // width: 340px;
-      background: $light-grey;
-      border-radius: 25px;
+      // background: $light-grey;
+      // border-radius: 25px;
       padding: 10px;
 
       .app-container {
@@ -60,12 +60,24 @@ body {
              display: flex;
              flex-direction: column;
 
-             .message-item {
-               background-color: #ffd9df;
+             .ai {
+               background-color: $pink;
                padding: 10px;
                border-radius: 4px;
                margin-bottom: 10px;
+               width: 70%;
+               max-width: 500px;
              }
+
+              .you {
+                background-color: $input-grey;
+                padding: 10px;
+                border-radius: 4px;
+                margin-bottom: 10px;
+                width: 70%;
+                max-width: 500px;
+                align-self: flex-end;
+              }
            }
          }
         }
@@ -77,6 +89,8 @@ body {
           margin-top: 10px;
 
           form {
+            width: 95%;
+
             input {
               background: #E8EEF2;
               height: 100%;
