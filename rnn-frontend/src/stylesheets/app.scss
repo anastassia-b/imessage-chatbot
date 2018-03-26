@@ -34,8 +34,8 @@ body {
       padding: 10px;
 
       .app-container {
-        margin: 40px 8px;
-        height: 560px;
+        margin: 8px 8px;
+        // height: 560px;
         background: white;
         border-radius: 2px;
         border: 1.5px solid black;
@@ -67,6 +67,7 @@ body {
                margin-bottom: 10px;
                width: 70%;
                max-width: 500px;
+               overflow: hidden;
              }
 
               .you {

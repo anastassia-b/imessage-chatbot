@@ -57,8 +57,7 @@ body {
       flex-direction: column;
       padding: 10px; }
       body .app .app-main .app-container {
-        margin: 40px 8px;
-        height: 560px;
+        margin: 8px 8px;
         background: white;
         border-radius: 2px;
         border: 1.5px solid black;
@@ -83,7 +82,8 @@ body {
                 border-radius: 4px;
                 margin-bottom: 10px;
                 width: 70%;
-                max-width: 500px; }
+                max-width: 500px;
+                overflow: hidden; }
               body .app .app-main .app-container .chat-main .message-list-container #message-list .you {
                 background-color: #E8EEF2;
                 padding: 10px;
