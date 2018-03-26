@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './stylesheets/app.css';
 import Chat from './components/Chat.js';
 
 class App extends Component {
@@ -7,7 +7,6 @@ class App extends Component {
     return (
       <div className="app">
         <header className="app-header">
-          <h1 className="app-title">Welcome</h1>
         </header>
         <Chat />
       </div>
