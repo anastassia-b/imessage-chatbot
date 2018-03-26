@@ -16,15 +16,16 @@ class Chat extends React.Component {
   async getMessage() {
     const response = await fetch('http://ec2-52-42-96-48.us-west-2.compute.amazonaws.com/message');
     const message = await response.text();
+    const formatMessage = ["ai", message]
     await this.setState((prevState, props) => {
-      prevState['messages'].push(message);
+      prevState['messages'].push(formatMessage);
       return { 'messages': prevState['messages']}
     });
   }
 
   messageList() {
     return this.state.messages.map(message => (
-      <li className="message-item">{message}</li>
+      <li className={message[0]}>{message[1]}</li>
     ))
   }
 
@@ -40,9 +41,10 @@ class Chat extends React.Component {
 
   submitMessage(e) {
     e.preventDefault();
-    const yourMessage = "Your Message (WIP): " + this.state.currentMessage;
+    const yourMessage = "You: " + this.state.currentMessage;
+    const formatMessage = ["you", yourMessage];
     this.setState((prevState, props) => {
-      prevState['messages'].push(yourMessage);
+      prevState['messages'].push(formatMessage);
       return { 'messages': prevState['messages'], currentMessage: "" }
     });
     this.getMessage();
