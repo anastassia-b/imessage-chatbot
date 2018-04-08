@@ -76,7 +76,6 @@ body {
       body .app .app-main .app-container {
         height: 100vh;
         background: white;
-        border-radius: 2px;
         border: 1px solid black;
         display: flex;
         flex-direction: column;
@@ -84,7 +83,8 @@ body {
         padding: 10px 20px; }
         body .app .app-main .app-container .chat-main {
           display: flex;
-          flex-direction: column; }
+          flex-direction: column;
+          height: 90vh; }
           body .app .app-main .app-container .chat-main h4 {
             padding-bottom: 10px;
             margin: 0px auto; }
@@ -96,7 +96,7 @@ body {
               body .app .app-main .app-container .chat-main .message-list-container #message-list .ai {
                 background-color: #ffd9df;
                 padding: 10px;
-                border-radius: 4px;
+                border-radius: 20px;
                 margin-bottom: 10px;
                 width: 70%;
                 max-width: 500px;
@@ -104,7 +104,7 @@ body {
               body .app .app-main .app-container .chat-main .message-list-container #message-list .you {
                 background-color: #E8EEF2;
                 padding: 10px;
-                border-radius: 4px;
+                border-radius: 20px;
                 margin-bottom: 10px;
                 width: 50%;
                 max-width: 500px;
@@ -113,39 +113,41 @@ body {
           display: flex;
           flex-direction: column;
           min-height: 45px;
-          margin-top: 10px; }
+          margin-top: 10px;
+          justify-content: flex-end; }
           body .app .app-main .app-container .chat-bottom .loading #ai-loading {
             background-color: #ffd9df;
             padding: 10px 20px;
-            border-radius: 4px;
-            margin-bottom: 10px;
-            width: 30px;
-            max-width: 500px;
-            overflow: hidden; }
+            border-radius: 20px;
+            width: 50px;
+            overflow: hidden;
+            margin-bottom: 10px; }
           body .app .app-main .app-container .chat-bottom .input-area {
             display: flex;
             justify-content: space-around; }
             body .app .app-main .app-container .chat-bottom .input-area form {
               width: 100%;
-              margin-right: 10px; }
+              margin-right: 10px;
+              height: 40px; }
               body .app .app-main .app-container .chat-bottom .input-area form input {
                 background: #E8EEF2;
                 height: 100%;
                 width: 100%;
                 box-sizing: border-box;
                 padding: 0px 15px;
-                border-radius: 4px;
+                border-radius: 20px;
                 border: 1px solid #C7D3DD; }
           body .app .app-main .app-container .chat-bottom button {
             /* padding: 1.2em 2em; */
             padding: 10px 30px;
+            height: 40px;
             text-decoration: none;
             text-align: center;
             cursor: pointer;
             user-select: none;
             color: white;
             /* background: linear-gradient(135deg, #6e8efb, #a777e3); */
-            border-radius: 4px;
+            border-radius: 20px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
             background: #DE1A1A;
             /* transition: 0.5s background; */ }
