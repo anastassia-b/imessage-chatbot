@@ -11,14 +11,14 @@ CORS(app)
 @app.route("/sms", methods=['GET', 'POST'])
 def sms_reply():
     resp = MessagingResponse()
-    rnn_message = generate_message(459)
+    rnn_message = generate_message(450)
     resp.message(rnn_message)
 
     return str(resp)
 
 @app.route("/message", methods=['GET'])
 def message_reply():
-    return str(generate_message(459))
+    return str(generate_message(250))
 
 if __name__ == '__main__':
     app.run()
