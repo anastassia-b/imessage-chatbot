@@ -15,6 +15,10 @@ class Chat extends React.Component {
     this.state = { 'messages': [], currentMessage: "", loading: false };
   }
 
+  componentDidMount() {
+    this.nameInput.focus();
+  }
+
   handleChange(e) {
     this.setState({ currentMessage: e.target.value });
   }
@@ -44,7 +48,7 @@ class Chat extends React.Component {
   }
 
   async getMessage() {
-    // this.setState({ loading: true })
+    this.setState({ loading: true })
     const response = await fetch('http://ec2-52-42-96-48.us-west-2.compute.amazonaws.com/message');
     // testing locally:
     // const response = await fetch('http://127.0.0.1:5000/message');
@@ -68,7 +72,7 @@ class Chat extends React.Component {
 
   loading() {
     if (this.state.loading) {
-      return <li id="ai-loading">. . .</li>
+      return <li id="ai-loading">...</li>
     }
   }
 
@@ -92,6 +96,7 @@ class Chat extends React.Component {
               <label>
                 <input
                   type="text"
+                  ref={(input) => { this.nameInput = input; }}
                   value={this.state.currentMessage}
                   onChange={this.handleChange}>
                 </input>
