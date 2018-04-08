@@ -45,7 +45,7 @@ body {
   height: 100vh;
   width: 100vw;
   background: #37393A;
-  font-size: 18px; }
+  font-size: 16px; }
   body .app {
     display: flex;
     justify-content: center;
@@ -54,6 +54,8 @@ body {
     align-items: center;
     height: 100vh; }
     body .app .app-side {
+      box-sizing: border-box;
+      border: 2px solid black;
       height: 100vh;
       flex: 1;
       background: #E8EEF2; }
@@ -104,11 +106,20 @@ body {
           flex-direction: column;
           min-height: 45px;
           margin-top: 10px; }
+          body .app .app-main .app-container .chat-bottom .loading #ai-loading {
+            background-color: #ffd9df;
+            padding: 10px 20px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            width: 30px;
+            max-width: 500px;
+            overflow: hidden; }
           body .app .app-main .app-container .chat-bottom .input-area {
             display: flex;
             justify-content: space-around; }
             body .app .app-main .app-container .chat-bottom .input-area form {
-              width: 95%; }
+              width: 100%;
+              margin-right: 10px; }
               body .app .app-main .app-container .chat-bottom .input-area form input {
                 background: #E8EEF2;
                 height: 100%;

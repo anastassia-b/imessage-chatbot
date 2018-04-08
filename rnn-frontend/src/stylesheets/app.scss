@@ -12,7 +12,7 @@ body {
   height: 100vh;
   width: 100vw;
   background: $dark-grey;
-  font-size: 18px;
+  font-size: 16px;
 
   .app {
     display: flex;
@@ -23,6 +23,8 @@ body {
     height: 100vh;
 
     .app-side {
+      box-sizing: border-box;
+      border: 2px solid black;
       height: 100vh;
       flex: 1;
       background: $input-grey;
@@ -87,6 +89,7 @@ body {
          }
         }
 
+
         .chat-bottom {
           display: flex;
           flex-direction: column;
@@ -95,6 +98,15 @@ body {
 
           .loading {
 
+            #ai-loading {
+              background-color: $pink;
+              padding: 10px 20px;
+              border-radius: 4px;
+              margin-bottom: 10px;
+              width: 30px;
+              max-width: 500px;
+              overflow: hidden;
+            }
           }
 
           .input-area {
@@ -102,7 +114,8 @@ body {
             justify-content: space-around;
 
             form {
-              width: 95%;
+              width: 100%;
+              margin-right: 10px;
 
               input {
                 background: #E8EEF2;
