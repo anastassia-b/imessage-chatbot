@@ -63,17 +63,18 @@ body {
       display: flex;
       flex: 3;
       flex-direction: column;
+      justify-content: center;
       padding: 10px; }
       body .app .app-main .app-container {
         margin: 8px 8px;
-        height: 90vh;
+        height: 92vh;
         background: white;
         border-radius: 2px;
         border: 1.5px solid black;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        padding: 10px; }
+        padding: 10px 20px; }
         body .app .app-main .app-container .chat-main {
           display: flex;
           flex-direction: column; }
@@ -98,7 +99,7 @@ body {
                 padding: 10px;
                 border-radius: 4px;
                 margin-bottom: 10px;
-                width: 70%;
+                width: 50%;
                 max-width: 500px;
                 align-self: flex-end; }
         body .app .app-main .app-container .chat-bottom {
@@ -143,5 +144,12 @@ body {
             /* transition: 0.5s background; */ }
           body .app .app-main .app-container .chat-bottom button:hover {
             background: black; }
+
+@media only screen and (max-width: 900px) {
+  .app-side {
+    display: none; }
+
+  .app-main {
+    height: 100vh; } }
 
 /*# sourceMappingURL=app.css.map */

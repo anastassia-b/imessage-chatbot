@@ -37,18 +37,20 @@ body {
       // width: 340px;
       // background: $light-grey;
       // border-radius: 25px;
+      // height: 100vh;
+      justify-content: center;
       padding: 10px;
 
       .app-container {
         margin: 8px 8px;
-        height: 90vh;
+        height: 92vh;
         background: white;
         border-radius: 2px;
         border: 1.5px solid black;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        padding: 10px;
+        padding: 10px 20px;
 
         .chat-main {
           display: flex;
@@ -81,7 +83,7 @@ body {
                 padding: 10px;
                 border-radius: 4px;
                 margin-bottom: 10px;
-                width: 70%;
+                width: 50%;
                 max-width: 500px;
                 align-self: flex-end;
               }
@@ -151,5 +153,16 @@ body {
 
       }
     }
+  }
+}
+
+
+@media only screen and (max-width: 900px) {
+  .app-side {
+    display: none;
+  }
+
+  .app-main {
+    height: 100vh;
   }
 }

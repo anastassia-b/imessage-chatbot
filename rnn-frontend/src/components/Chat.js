@@ -44,9 +44,10 @@ class Chat extends React.Component {
   }
 
   async getMessage() {
-    // const response = await fetch('http://ec2-52-42-96-48.us-west-2.compute.amazonaws.com/message');
-    this.setState({ loading: true })
-    const response = await fetch('http://127.0.0.1:5000/message');
+    // this.setState({ loading: true })
+    const response = await fetch('http://ec2-52-42-96-48.us-west-2.compute.amazonaws.com/message');
+    // testing locally:
+    // const response = await fetch('http://127.0.0.1:5000/message');
     const message = await response.text();
     const messageList = message.split("\n").slice(1, -1);
     let formatMessage;
