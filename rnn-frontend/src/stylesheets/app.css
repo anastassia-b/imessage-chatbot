@@ -55,22 +55,29 @@ body {
     height: 100vh; }
     body .app .app-side {
       box-sizing: border-box;
-      border: 2px solid black;
+      border: 1px solid black;
       height: 100vh;
       flex: 1;
       background: #E8EEF2; }
+      body .app .app-side .side {
+        margin: 10px; }
+        body .app .app-side .side h4 {
+          border-bottom: 1px solid black;
+          padding: 10px 0px; }
+        body .app .app-side .side div {
+          height: 20vh; }
     body .app .app-main {
+      box-sizing: border-box;
       display: flex;
       flex: 3;
       flex-direction: column;
-      justify-content: center;
-      padding: 10px; }
+      height: 100vh;
+      justify-content: center; }
       body .app .app-main .app-container {
-        margin: 8px 8px;
-        height: 92vh;
+        height: 100vh;
         background: white;
         border-radius: 2px;
-        border: 1.5px solid black;
+        border: 1px solid black;
         display: flex;
         flex-direction: column;
         justify-content: space-between;

@@ -24,29 +24,44 @@ body {
 
     .app-side {
       box-sizing: border-box;
-      border: 2px solid black;
+      border: 1px solid black;
       height: 100vh;
       flex: 1;
       background: $input-grey;
+      // padding: 10px;
+
+      .side {
+        margin: 10px;
+        // color: white;
+        h4 {
+          border-bottom: 1px solid black;
+          padding: 10px 0px;
+        }
+
+        div {
+          height: 20vh;
+        }
+      }
     }
 
     .app-main {
+      box-sizing: border-box;
       display: flex;
       flex: 3;
       flex-direction: column;
       // width: 340px;
       // background: $light-grey;
       // border-radius: 25px;
-      // height: 100vh;
+      height: 100vh;
       justify-content: center;
-      padding: 10px;
+      // padding: 10px;
 
       .app-container {
-        margin: 8px 8px;
-        height: 92vh;
+        // margin: 8px 8px;
+        height: 100vh;
         background: white;
         border-radius: 2px;
-        border: 1.5px solid black;
+        border: 1px solid black;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
