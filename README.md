@@ -48,10 +48,12 @@ Now draw the rest of the owl
 When a text is sent to our Twilio webhook, it hits out app, which generates a message and responds.
 
 <p align="center">
-<img src="/docs/message_ai.png" width="300"/>
+<img src="/docs/message_ai.png" height="600"/>
+<img src="/docs/webapp_ai.png" height="600"/>
 </p>
+<p align="center">Chatbot available through both SMS and online chat.</p>
 
-Our app is very basic. It has two backend routes, one to respond to texts via Twilio and one that responds to messages on the [web app version](http://chat.anastassia.io/).
+Our app is very basic. It has two backend routes, one to respond to texts via Twilio and one that responds to messages on the [online app version](http://chat.anastassia.io/).
 
 ```python
 @app.route("/sms", methods=['GET', 'POST'])
