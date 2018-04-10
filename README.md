@@ -4,7 +4,7 @@ In-progress project: Building a neural network to learn an individual's style of
 
 **Current State:**
 Trained on my iMessages from the past year (many of which are with my mom). ~**60%** accuracy in letter-by-letter message generation. Disclaimer: I am not responsible for what the neural network generates!
-[Live Chat - Web Version](http://chat.anastassia.io/).
+[Live Chat](http://chat.anastassia.io/).
 
 ### Technologies
 
@@ -48,7 +48,7 @@ Now draw the rest of the owl
 When a text is sent to our Twilio webhook, it hits out app, which generates a message and responds.
 
 <p align="center">
-<img src="/docs/message_ai.png" alt="Drawing" style="width: 300px;"/>
+<img src="/docs/message_ai.png" width="300"/>
 </p>
 
 Our app is very basic. It has two backend routes, one to respond to texts via Twilio and one that responds to messages on the [web app version](http://chat.anastassia.io/).
@@ -66,13 +66,13 @@ def message_reply():
     return str(generate_message(459))
 ```
 
-The next step is to generate responses of varying natural lengths, instead of always `459` characters.
+The current step is to generate responses of varying natural lengths 🤔.
 
 ### Next Steps
 
 - [x] Add a second layer to the model
 - [x] Improve RNN performance with LSTM cells
 - [x] In progress: Build web app version with **React**
-- [ ] Generate responses of varying lengths
+- [x] In progress: Generate responses of varying lengths
 - [ ] Look into Natural Language Processing (NLP)
 - [ ] Increase training data
